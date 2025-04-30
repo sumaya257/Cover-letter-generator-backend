@@ -13,7 +13,37 @@ export class GeneratorService {
   async generateCoverLetters(resume: string, jobDesc: string): Promise<string[]> {
     try {
       // ✅ UPDATED: Optimized and shortened prompt to avoid token limit
-     
+      const prompt = `
+You are an expert cover letter writer.
+
+Generate two distinct, concise (≤250 words each) professional cover letters based only on:
+1. This Job Description (including job title + company name)
+2. This Resume
+
+Strict Instructions:
+- Use exact job title and company name from job description.
+- Include only qualifications, degrees, skills, and experience found in the resume.
+- If experience exists, focus on relevant achievements.
+- If no experience, emphasize education and projects (exactly as written).
+- Include today's date and candidate's location (if mentioned in resume).
+- No placeholders like [Your Name], [Company Name], etc.
+- Output ONLY the two final letters, no extra commentary.
+- Do NOT use any placeholders such as [Job Title], [Company Name], [Your Name], etc. Use only the actual values found in the inputs. If don't find input then use placeholder.
+
+
+Format:
+1. First Cover Letter:
+[Letter]
+
+2. Second Cover Letter:
+[Letter]
+
+Job Description:
+${jobDesc}
+
+Resume:
+${resume}
+`;
 
       const response = await axios.post(
         'https://openrouter.ai/api/v1/chat/completions',

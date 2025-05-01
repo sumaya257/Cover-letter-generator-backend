@@ -6,13 +6,14 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:5173', 
-      'https://cover-letter-generator-frontend-production.up.railway.app'
+      'https://cover-letter-generator-frontend-production.up.railway.app',
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    credentials: true, // Optional: only if you're using cookies/auth
+    credentials: true,
   });
 
-  await app.listen(process.env.PORT || 3000);
+  const port = process.env.PORT || 3000;
+  await app.listen(port);
+  console.log(`🚀 Application is running on: http://localhost:${port}`);
 }
 bootstrap();

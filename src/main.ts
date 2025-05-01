@@ -6,7 +6,7 @@ async function bootstrap() {
 
   app.enableCors({
     origin: [
-      'http://localhost:5173', // or 5173 or whatever your frontend dev port is
+      'http://localhost:5173', 
       'https://cover-letter-generator-frontend-production.up.railway.app'
     ],
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],

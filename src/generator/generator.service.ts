@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import axios from 'axios';
 import { ConfigService } from '@nestjs/config';
@@ -12,7 +13,7 @@ export class GeneratorService {
 
   async generateCoverLetters(resume: string, jobDesc: string): Promise<string[]> {
     try {
-      // ✅ UPDATED: Optimized and shortened prompt to avoid token limit
+      //  optimized prompt to avoid token limit
       const prompt = `
 You are an expert cover letter writer.
 
@@ -48,7 +49,7 @@ ${resume}
       const response = await axios.post(
         'https://openrouter.ai/api/v1/chat/completions',
         {
-          model: 'mistralai/mistral-7b-instruct', // or try 'openchat/openchat-3.5'
+          model: 'mistralai/mistral-7b-instruct', 
           messages: [{ role: 'user', content: prompt }],
           temperature: 0.7,
         },
@@ -62,13 +63,15 @@ ${resume}
         },
       );
 
+      // for validation
+
       const content = response.data?.choices?.[0]?.message?.content;
 
       if (!content) {
         throw new InternalServerErrorException('No valid content returned from API');
       }
 
-      // ✅ Same as before: splitting based on "2."
+      // splitting based on "2."
       const letters = content.split(/\n?2\.\s/);
 
       if (letters.length < 2) {

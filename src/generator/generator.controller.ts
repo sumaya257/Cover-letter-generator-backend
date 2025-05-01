@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Controller, Post, Body } from '@nestjs/common';
 import { GeneratorService } from './generator.service';
 
